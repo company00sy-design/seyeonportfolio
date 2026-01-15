@@ -297,6 +297,54 @@ function animateSkillBar(el){
   }, 650);
 }
 
+function animateSkillBar(el){
+  if(el.dataset.animated === "1") return; // 한 번만
+  el.dataset.animated = "1";
+
+  const lv = Math.max(0, Math.min(100, Number(el.dataset.level || 0)));
+  const fill = el.querySelector(".bar-fill");
+  const out = el.querySelector(".skill-out");
+
+  const reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+
+  // 숫자 카운트업(이미 함수 있으면 그대로 사용)
+  if(out) animateCountUp(out, lv, 900);
+
+  if(!fill) return;
+
+  if(reduced){
+    fill.style.width = `${lv}%`;
+    return;
+  }
+
+  // 오버슈트 정도 (원하면 6~12 사이로 조절)
+  const over = Math.min(100, lv + 8);
+
+  // 1) 올라가는 시간 / 2) 내려오는 시간
+  const upDur = 520;    // 오버슈트까지 빠르게
+  const downDur = 220;  // 살짝 튕기듯 내려오기
+
+  // 0에서 시작
+  fill.style.width = "0%";
+
+  // 오버슈트로 올라가기(먼저 transition을 up으로)
+  fill.style.transition = `width ${upDur}ms cubic-bezier(.2,.8,.2,1)`;
+  fill.getBoundingClientRect(); // 강제 리플로우(transition 확실히 먹이기)
+  fill.style.width = `${over}%`;
+
+  // 오버슈트까지 도달한 뒤에 내려오기
+  setTimeout(() => {
+    fill.style.transition = `width ${downDur}ms ease-out`;
+    fill.getBoundingClientRect();
+    fill.style.width = `${lv}%`;
+
+    // 원래 CSS transition으로 복귀(다음 요소 영향 방지)
+    setTimeout(() => {
+      fill.style.transition = "";
+    }, downDur + 30);
+  }, upDur + 30);
+}
+
 
 
 
