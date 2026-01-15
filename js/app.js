@@ -232,5 +232,71 @@ function animateSkillBar(el){
 }
 
 
+function animateCountUp(el, to, duration = 900){
+  const reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+  if(reduced){
+    el.textContent = `${to}%`;
+    return;
+  }
+
+  const from = 0;
+  const start = performance.now();
+
+  function tick(now){
+    const t = Math.min(1, (now - start) / duration);
+    // easeOutCubic
+    const eased = 1 - Math.pow(1 - t, 3);
+    const value = Math.round(from + (to - from) * eased);
+    el.textContent = `${value}%`;
+    if(t < 1) requestAnimationFrame(tick);
+  }
+
+  el.textContent = "0%";
+  requestAnimationFrame(tick);
+}
+
+function animateSkillBar(el){
+  const lv = Math.max(0, Math.min(100, Number(el.dataset.level || 0)));
+  const fill = el.querySelector(".bar-fill");
+  const out = el.querySelector(".skill-out");
+
+  const reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+
+  // 숫자 카운트업
+  if(out) animateCountUp(out, lv, 900);
+
+  if(!fill) return;
+
+  if(reduced){
+    fill.style.width = `${lv}%`;
+    return;
+  }
+
+  // 오버슈트 폭(너무 과하면 촌스러워서 2~4 정도 추천)
+  const overshoot = Math.min(100, lv + 3);
+
+  // 1) 0에서 시작
+  fill.style.width = "0%";
+
+  // 2) 다음 프레임에 오버슈트까지 채우기
+  requestAnimationFrame(() => {
+    fill.style.width = `${overshoot}%`;
+  });
+
+  // 3) 살짝 딜레이 후, 목표값으로 “툭” 내려오기
+  //    (0.9s transition 기준으로 650ms쯤이 자연스러움)
+  setTimeout(() => {
+    // 내려올 때는 조금 더 빠르게
+    fill.style.transition = "width .25s ease-out";
+    fill.style.width = `${lv}%`;
+
+    // 다음 애니메이션을 위해 transition 원복
+    setTimeout(() => {
+      fill.style.transition = ""; // CSS 기본값으로 돌아감
+    }, 260);
+  }, 650);
+}
+
+
 
 
