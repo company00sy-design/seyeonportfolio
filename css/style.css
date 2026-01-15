@@ -71,10 +71,6 @@ ul{margin:0;padding-left:18px}
   transition: transform .25s ease, box-shadow .25s ease;
 }
 
-.profile-left:hover .profile-photo{
-  transform: translateY(-2px);
-  box-shadow: 0 24px 70px rgba(17,19,24,.14);
-}
 
 @media (max-width: 920px){
   .profile-hero{ grid-template-columns: 160px 1fr; }
@@ -432,6 +428,7 @@ ul{margin:0;padding-left:18px}
   .grid{grid-template-columns:1fr}
   .hero{padding-top:38px}
 }
+
 
 
 
