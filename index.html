@@ -2,69 +2,247 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>NAME — Portfolio</title>
-  <meta name="description" content="화이트/클린 디자인 포트폴리오" />
+  <meta name="description" content="Design · Writing · SNS Portfolio" />
   <meta property="og:title" content="NAME — Portfolio" />
   <meta property="og:description" content="Design · Writing · SNS" />
-  <meta property="og:image" content="/assets/img/og.jpg" />
+  <meta property="og:image" content="./assets/img/og.jpg" />
   <link rel="stylesheet" href="./css/style.css" />
-  <script src="./js/app.js"></script>
-
 </head>
 <body>
-  <header class="header">
+
+  <!-- Header -->
+  <header class="header" id="top">
     <div class="header-inner">
-      <a class="logo" href="/">NAME</a>
-      <nav class="nav">
-        <a href="/work.html">Work</a>
-        <a href="/writing.html">Writing</a>
-        <a class="pill" href="/contact.html">Contact</a>
+      <a class="logo" href="#top" aria-label="Home">NAME</a>
+
+      <nav class="gnb" aria-label="Primary">
+        <a class="gnb-link" href="#work">Work</a>
+        <a class="gnb-link" href="#writing">Writing</a>
+        <a class="gnb-link" href="#sns">SNS</a>
+        <a class="gnb-link" href="#about">About</a>
+        <a class="gnb-link pill" href="#contact">Contact</a>
       </nav>
+
+      <div class="icons">
+        <button class="icon-btn" id="btnSearch" aria-label="Search">
+          <!-- magnifier -->
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M16.5 16.5 21 21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <button class="icon-btn" id="btnMenu" aria-label="Menu">
+          <!-- hamburger -->
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
     </div>
   </header>
 
-  <main id="home" class="container">
+  <!-- Search Overlay -->
+  <section class="overlay" id="searchOverlay" aria-hidden="true">
+    <div class="overlay-backdrop" data-close="search"></div>
+    <div class="overlay-panel" role="dialog" aria-modal="true" aria-label="Search panel">
+      <div class="overlay-head">
+        <strong>Search</strong>
+        <button class="icon-btn" data-close="search" aria-label="Close search">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+      <input id="searchInput" class="search-input" placeholder="project / tag / keyword" />
+      <p class="hint">Work / Writing / SNS 카드 제목·설명·태그 기준으로 필터됩니다.</p>
+
+      <div class="search-result">
+        <div class="search-meta" id="searchMeta">검색어를 입력하면 결과가 표시됩니다.</div>
+        <div class="grid" id="searchGrid"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Aside Drawer -->
+  <aside class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawer-backdrop" data-close="drawer"></div>
+    <div class="drawer-panel" role="dialog" aria-modal="true" aria-label="Menu drawer">
+      <div class="drawer-head">
+        <strong>Menu</strong>
+        <button class="icon-btn" data-close="drawer" aria-label="Close menu">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="drawer-links">
+        <a class="drawer-link" href="#work">Work</a>
+        <a class="drawer-link" href="#writing">Writing</a>
+        <a class="drawer-link" href="#sns">SNS</a>
+        <a class="drawer-link" href="#about">About</a>
+        <a class="drawer-link" href="#contact">Contact</a>
+      </div>
+
+      <div class="drawer-meta">
+        <div class="meta-row">
+          <span class="meta-k">Email</span>
+          <a class="meta-v" href="mailto:email@example.com">email@example.com</a>
+        </div>
+        <div class="meta-row">
+          <span class="meta-k">Links</span>
+          <div class="meta-v">
+            <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
+            <span class="dot">·</span>
+            <a href="https://blog.naver.com/" target="_blank" rel="noopener">Blog</a>
+            <span class="dot">·</span>
+            <a href="https://youtube.com/" target="_blank" rel="noopener">YouTube</a>
+          </div>
+        </div>
+      </div>
+
+      <p class="drawer-foot">© <span id="yearA"></span> NAME</p>
+    </div>
+  </aside>
+
+  <!-- Floating -->
+  <div class="float">
+    <button class="float-btn" id="btnTop" aria-label="Scroll to top">↑</button>
+    <button class="float-btn" id="btnBottom" aria-label="Scroll to bottom">↓</button>
+  </div>
+
+  <!-- Main -->
+  <main class="container">
+
+    <!-- Hero -->
     <section class="hero">
-      <p class="kicker">White / Clean / Subtle Motion</p>
-      <h1 class="reveal">디자인을 만들고,<br/>콘텐츠로 설득합니다.</h1>
-      <p class="reveal">브랜딩 · 상세페이지 · 콘텐츠 기획 · 블로그 · SNS</p>
-      <div class="actions reveal">
-        <a class="btn" href="/work.html">대표 작업 보기</a>
-        <a class="btn ghost" href="/contact.html">연락하기</a>
+      <p class="kicker reveal">WHITE / CLEAN / SUBTLE MOTION</p>
+      <h1 class="reveal">
+        디자인을 만들고,<br />
+        콘텐츠로 설득합니다.
+      </h1>
+      <p class="lead reveal">Branding · Detail Page · Content · Blog · SNS</p>
+
+      <div class="hero-actions reveal">
+        <a class="btn" href="#work">대표 작업 보기</a>
+        <a class="btn ghost" href="#contact">연락하기</a>
+      </div>
+
+      <div class="hero-mini reveal">
+        <div class="mini">
+          <div class="mini-k">Focus</div>
+          <div class="mini-v">정보구조 · 카피 · 비주얼 시스템</div>
+        </div>
+        <div class="mini">
+          <div class="mini-k">Strength</div>
+          <div class="mini-v">빠른 제작 + 유지보수 가능한 구성</div>
+        </div>
       </div>
     </section>
 
-    <section class="section">
+    <!-- Work -->
+    <section id="work" class="section">
       <div class="section-head">
-        <h2>Featured Work</h2>
-        <a class="more" href="/work.html">전체 보기 →</a>
+        <div>
+          <h2 class="reveal">Work</h2>
+          <p class="sub reveal">케이스 스터디(내부) / 하이라이트(외부)로 분리</p>
+        </div>
+
+        <div class="seg reveal" role="tablist" aria-label="Work toggle">
+          <button class="seg-btn active" data-tab="case" role="tab" aria-selected="true">Case Study</button>
+          <button class="seg-btn" data-tab="highlight" role="tab" aria-selected="false">Highlights</button>
+        </div>
       </div>
-      <div id="workGrid" class="grid"></div>
+
+      <div class="grid" id="caseGrid"></div>
+      <div class="grid" id="highlightGrid" style="display:none"></div>
+
+      <div class="section-foot reveal">
+        <span class="muted">* Case Study는 `./projects/` 링크를 자동 인식합니다.</span>
+      </div>
     </section>
 
-    <section class="section">
+    <!-- Writing -->
+    <section id="writing" class="section">
       <div class="section-head">
-        <h2>Writing Picks</h2>
-        <a class="more" href="/writing.html">전체 보기 →</a>
+        <div>
+          <h2 class="reveal">Writing</h2>
+          <p class="sub reveal">글은 링크 카드로 큐레이션(운영 단순화)</p>
+        </div>
       </div>
-      <div id="postGrid" class="grid"></div>
+      <div class="grid" id="postGrid"></div>
     </section>
 
-    <section class="section">
+    <!-- SNS -->
+    <section id="sns" class="section">
       <div class="section-head">
-        <h2>SNS Highlights</h2>
+        <div>
+          <h2 class="reveal">SNS</h2>
+          <p class="sub reveal">릴스/피드 하이라이트 — 썸네일 + 링크</p>
+        </div>
       </div>
-      <div id="snsGrid" class="grid"></div>
+      <div class="grid" id="snsGrid"></div>
     </section>
+
+    <!-- About -->
+    <section id="about" class="section">
+      <div class="section-head">
+        <div>
+          <h2 class="reveal">About</h2>
+          <p class="sub reveal">짧고 선명하게(6~10줄)</p>
+        </div>
+      </div>
+
+      <div class="about">
+        <div class="card reveal">
+          <h3 class="h3">한 문장 소개</h3>
+          <p class="p">사용자 관점에서 정보 구조를 정리하고, 콘텐츠가 “읽히는 화면”으로 완성합니다.</p>
+          <div class="tagrow">
+            <span class="tag">IA</span>
+            <span class="tag">Copy</span>
+            <span class="tag">Visual System</span>
+            <span class="tag">Motion</span>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <h3 class="h3">가능한 작업</h3>
+          <ul class="list">
+            <li>브랜딩 톤앤매너 정리 + 시각 시스템</li>
+            <li>상세페이지(구성/카피/비주얼) 제작</li>
+            <li>블로그·SNS 콘텐츠 기획/패키징</li>
+            <li>정적 사이트 구축(HTML/CSS/JS) 및 운영</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section">
+      <div class="section-head">
+        <div>
+          <h2 class="reveal">Contact</h2>
+          <p class="sub reveal">가장 빠른 채널로 연결</p>
+        </div>
+      </div>
+
+      <div class="cardlist">
+        <a class="cardline reveal" href="mailto:email@example.com">Email → email@example.com</a>
+        <a class="cardline reveal" href="https://instagram.com/" target="_blank" rel="noopener">Instagram →</a>
+        <a class="cardline reveal" href="https://blog.naver.com/" target="_blank" rel="noopener">Blog →</a>
+        <a class="cardline reveal" href="#" target="_blank" rel="noopener">Resume(PDF) →</a>
+      </div>
+    </section>
+
   </main>
 
   <footer class="footer">
-    <span>© NAME</span>
-    <span>email@example.com</span>
+    <span>© <span id="yearB"></span> NAME</span>
+    <span class="muted">Built with HTML/CSS/JS</span>
   </footer>
 
-  <script src="/js/app.js"></script>
+  <script src="./js/app.js"></script>
 </body>
 </html>
-
