@@ -318,7 +318,8 @@ function animateSkillBar(el){
   }
 
   // 오버슈트 정도 (원하면 6~12 사이로 조절)
-  const over = Math.min(100, lv + 8);
+  const overshoot = lv >= 85 ? 6 : lv >= 70 ? 9 : 12; // 낮을수록 더 튐
+  const over = Math.min(100, lv + overshoot);
 
   // 1) 올라가는 시간 / 2) 내려오는 시간
   const upDur = 520;    // 오버슈트까지 빠르게
@@ -344,6 +345,7 @@ function animateSkillBar(el){
     }, downDur + 30);
   }, upDur + 30);
 }
+
 
 
 
