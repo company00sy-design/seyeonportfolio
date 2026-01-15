@@ -146,6 +146,7 @@ ul{margin:0;padding-left:18px}
 }
 
 .profile-left:hover .profile-photo{
+  transform: translateY(-2px);
   box-shadow: 0 24px 70px rgba(17,19,24,.14);
 }
 
@@ -432,6 +433,7 @@ ul{margin:0;padding-left:18px}
   .grid{grid-template-columns:1fr}
   .hero{padding-top:38px}
 }
+
 
 
 
