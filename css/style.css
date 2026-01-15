@@ -1,0 +1,144 @@
+:root{
+  --bg:#ffffff;
+  --txt:#121316;
+  --muted:#5b616e;
+  --line:#e8ebf0;
+  --card:#ffffff;
+  --shadow: 0 10px 30px rgba(18,19,22,.06);
+  --radius:18px;
+  --max:1120px;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family: Pretendard, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", sans-serif;
+  background:var(--bg);
+  color:var(--txt);
+  line-height:1.55;
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+
+.container{max-width:var(--max); margin:0 auto; padding:28px 18px 90px;}
+
+.header{
+  position:sticky; top:0; z-index:20;
+  background: rgba(255,255,255,.78);
+  backdrop-filter: blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.header-inner{
+  max-width:var(--max); margin:0 auto;
+  padding:14px 18px;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.logo{font-weight:800; letter-spacing:.2px}
+.nav{display:flex; gap:14px; align-items:center}
+.nav a{color:var(--muted); font-weight:600}
+.nav a.active, .nav a:hover{color:var(--txt)}
+.pill{
+  padding:10px 12px; border:1px solid var(--line); border-radius:999px;
+  background:#fff; box-shadow: 0 6px 18px rgba(18,19,22,.04);
+}
+
+.hero{padding:54px 0 20px}
+.kicker{margin:0 0 10px; color:var(--muted); font-size:13px; letter-spacing:.14em; text-transform:uppercase}
+.hero h1{margin:0 0 12px; font-size:44px; line-height:1.1; letter-spacing:-.02em}
+.hero p{margin:0 0 18px; color:var(--muted); font-size:16px}
+.actions{display:flex; gap:10px; flex-wrap:wrap}
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:12px 14px; border-radius:14px;
+  border:1px solid var(--line);
+  background: var(--txt); color:#fff; font-weight:700;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.btn:hover{transform: translateY(-1px); box-shadow: var(--shadow);}
+.btn.ghost{background:#fff; color:var(--txt);}
+
+.section{margin-top:38px}
+.section-head{display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:12px}
+.section-head h2{margin:0; font-size:18px}
+.more{color:var(--muted); font-size:14px}
+
+.grid{display:grid; grid-template-columns: repeat(3, 1fr); gap:14px}
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:14px;
+  box-shadow: 0 8px 24px rgba(18,19,22,.04);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.card:hover{transform: translateY(-2px); box-shadow: var(--shadow);}
+.thumb{
+  width:100%;
+  aspect-ratio: 16/10;
+  border-radius: 14px;
+  overflow:hidden;
+  border:1px solid var(--line);
+  background:#f6f7fa;
+}
+.thumb img{width:100%; height:100%; object-fit:cover}
+.card h3{margin:12px 0 6px; font-size:16px}
+.card p{margin:0; color:var(--muted); font-size:14px}
+.tagrow{display:flex; flex-wrap:wrap; gap:6px; margin-top:12px}
+.tag{
+  font-size:12px; color:var(--muted);
+  border:1px solid var(--line);
+  padding:6px 10px; border-radius:999px;
+  background:#fff;
+}
+
+/* 필터 */
+.filters{display:flex; flex-wrap:wrap; gap:8px; margin:14px 0 18px}
+.fbtn{
+  padding:8px 10px; border-radius:999px;
+  border:1px solid var(--line); background:#fff;
+  color:var(--muted); font-weight:650; cursor:pointer;
+  transition: transform .18s ease;
+}
+.fbtn:hover{transform: translateY(-1px)}
+.fbtn.active{color:var(--txt); border-color:#cfd6e2}
+
+/* 페이지 헤드 */
+.pagehead{padding:26px 0 8px}
+.pagehead h1{margin:0 0 8px; font-size:30px}
+.lead{color:var(--muted); margin:0}
+
+/* 컨택트 리스트 */
+.cardlist{display:flex; flex-direction:column; gap:10px; margin-top:16px}
+.cardline{
+  padding:14px; border:1px solid var(--line); border-radius:16px;
+  background:#fff; box-shadow: 0 8px 24px rgba(18,19,22,.04);
+}
+.small{font-size:13px; color:var(--muted)}
+
+/* 푸터 */
+.footer{
+  border-top:1px solid var(--line);
+  padding:18px;
+  color:var(--muted);
+  display:flex; justify-content:space-between; gap:10px;
+}
+
+/* 은은한 스크롤 리빌 모션 */
+.reveal{
+  opacity:0;
+  transform: translateY(10px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+.reveal.is-in{
+  opacity:1;
+  transform: translateY(0);
+}
+
+@media (max-width: 920px){
+  .grid{grid-template-columns: repeat(2, 1fr)}
+  .hero h1{font-size:36px}
+}
+@media (max-width: 560px){
+  .grid{grid-template-columns: 1fr}
+  .hero{padding-top:36px}
+}
