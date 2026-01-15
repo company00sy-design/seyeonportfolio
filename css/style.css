@@ -145,6 +145,10 @@ ul{margin:0;padding-left:18px}
   background:rgba(17,19,24,.06);
 }
 
+.profile-left:hover .profile-photo{
+  box-shadow: 0 24px 70px rgba(17,19,24,.14);
+}
+
 /* Cards */
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .card{
@@ -428,6 +432,7 @@ ul{margin:0;padding-left:18px}
   .grid{grid-template-columns:1fr}
   .hero{padding-top:38px}
 }
+
 
 
 
