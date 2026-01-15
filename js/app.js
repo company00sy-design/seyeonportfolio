@@ -140,6 +140,7 @@ function mountYear(){
 async function init(){
   mountYear();
   wireUI();
+  mountSkillBars();
 
   const [works, posts, sns] = await Promise.all([
     loadJSON("./data/works.json"),
@@ -198,3 +199,17 @@ init().catch((err)=>{
   if(caseGrid) caseGrid.innerHTML = `<div class="card">데이터를 불러오지 못했습니다. (data/*.json 경로 확인)</div>`;
   mountReveal();
 });
+
+
+
+function mountSkillBars(){
+  document.querySelectorAll(".skillbar").forEach(el=>{
+    const lv = Math.max(0, Math.min(100, Number(el.dataset.level || 0)));
+    el.style.setProperty("--level", String(lv));
+    const out = el.querySelector(".skill-out");
+    if(out) out.textContent = `${lv}%`;
+  });
+}
+
+
+
