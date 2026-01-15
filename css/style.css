@@ -67,7 +67,6 @@ ul{margin:0;padding-left:18px}
   object-fit: cover;
   border: 1px solid var(--line);
   background: #fff;
-  box-shadow: 0 18px 50px rgba(17,19,24,.10);
   transition: transform .25s ease, box-shadow .25s ease;
 }
 
@@ -430,6 +429,7 @@ ul{margin:0;padding-left:18px}
   .grid{grid-template-columns:1fr}
   .hero{padding-top:38px}
 }
+
 
 
 
