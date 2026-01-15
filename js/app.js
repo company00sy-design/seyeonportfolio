@@ -211,5 +211,21 @@ function mountSkillBars(){
   });
 }
 
+function animateSkillBar(el){
+  const lv = Math.max(0, Math.min(100, Number(el.dataset.level || 0)));
+  const fill = el.querySelector(".bar-fill");
+  const out = el.querySelector(".skill-out");
+
+  if(out) out.textContent = `${lv}%`;
+
+  if(fill){
+    // 처음 0%에서 다음 프레임에 lv%로 바꿔서 애니메이션이 확실히 걸리게 함
+    fill.style.width = "0%";
+    requestAnimationFrame(() => {
+      fill.style.width = `${lv}%`;
+    });
+  }
+}
+
 
 
