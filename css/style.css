@@ -323,10 +323,23 @@ ul{margin:0;padding-left:18px}
   align-items:center;
 }
 .avatar{
-  width:44px;height:44px;border-radius:999px;
-  border:1px solid var(--line);
-  background: linear-gradient(180deg, #fff, #f3f5f9);
-  box-shadow: 0 10px 22px rgba(17,19,24,.06);
+  width: 92px;
+  height: 92px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  object-fit: cover;
+  background: #fff;
+  box-shadow: 0 18px 40px rgba(17,19,24,.10);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+/* 살짝 살아있는 느낌 */
+.profile-left:hover .avatar{
+  transform: translateY(-2px);
+  box-shadow: 0 22px 54px rgba(17,19,24,.14);
+}
+
+@media (max-width: 560px){
+  .avatar{ width: 76px; height: 76px; }
 }
 .timeline{margin-top:10px}
 .trow{
@@ -384,6 +397,7 @@ ul{margin:0;padding-left:18px}
   .grid{grid-template-columns:1fr}
   .hero{padding-top:38px}
 }
+
 
 
 
