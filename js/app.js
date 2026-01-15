@@ -36,6 +36,10 @@ function mountReveal(){
     entries.forEach(e=>{
       if(e.isIntersecting){
         e.target.classList.add("is-in");
+
+        // ✅ 스킬바면 막대 애니메이션 실행
+        if(e.target.classList.contains("skillbar")) animateSkillBar(e.target);
+
         io.unobserve(e.target);
       }
     });
@@ -226,6 +230,7 @@ function animateSkillBar(el){
     });
   }
 }
+
 
 
 
