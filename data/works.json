@@ -1,47 +1,34 @@
 [
   {
-    "title": "대표작 01 — (프로젝트명)",
-    "desc": "한 줄 요약: 무엇을/왜/결과",
+    "title": "상세페이지 리디자인 — 붙박이장",
+    "desc": "정보구조 정리 + 카피 + 비주얼 시스템 적용",
     "href": "./projects/project-01.html",
-    "thumb": "./assets/thumb/work-01.jpg",
-    "tags": ["Branding", "Content"]
+    "thumb": "./assets/thumbs/work-01.jpg",
+    "tags": ["Detail Page", "IA", "Copy"],
+    "category": "design"
   },
   {
-    "title": "대표작 02 — (프로젝트명)",
-    "desc": "한 줄 요약: 무엇을/왜/결과",
+    "title": "배너 디자인 패키지",
+    "desc": "프로모션/시즌 배너 제작 및 템플릿화",
     "href": "./projects/project-02.html",
-    "thumb": "./assets/thumb/work-02.jpg",
-    "tags": ["Detail Page", "Web/Operation"]
+    "thumb": "./assets/thumbs/work-02.jpg",
+    "tags": ["Banner", "Visual"],
+    "category": "design"
   },
   {
-    "title": "대표작 03 — (프로젝트명)",
-    "desc": "한 줄 요약: 무엇을/왜/결과",
+    "title": "포트폴리오 웹 구축",
+    "desc": "정적 페이지 구조 설계 + 배포(GitHub Pages)",
     "href": "./projects/project-03.html",
-    "thumb": "./assets/thumb/work-03.jpg",
-    "tags": ["SNS", "Content"]
-  },
-
-  {
-    "title": "Highlight — (작업명)",
-    "desc": "짧은 설명",
-    "href": "https://example.com",
-    "thumb": "./assets/thumb/work-04.jpg",
-    "tags": ["Blog"]
+    "thumb": "./assets/thumbs/work-03.jpg",
+    "tags": ["HTML", "CSS", "JS"],
+    "category": "web"
   },
   {
-    "title": "Highlight — (작업명)",
-    "desc": "짧은 설명",
-    "href": "https://example.com",
-    "thumb": "./assets/thumb/work-05.jpg",
-    "tags": ["Detail Page"]
+    "title": "릴스/피드 콘텐츠 제작",
+    "desc": "기획 + 촬영/편집 + 업로드 운영",
+    "href": "https://instagram.com/",
+    "thumb": "./assets/thumbs/work-04.jpg",
+    "tags": ["Reels", "SNS"],
+    "category": "content"
   }
-  {
-  "title": "상세페이지 리뉴얼 — 제품 A",
-  "desc": "톤앤매너 정리 + 구조 재설계",
-  "href": "#",
-  "thumb": "./assets/work/a.webp",
-  "tags": ["Detail Page", "Photoshop"],
-  "category": "design"
-}
 ]
-
