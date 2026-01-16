@@ -522,6 +522,36 @@ ul{margin:0;padding-left:18px}
   .twhen{ order: 0; }
 }
 
+/* Certificates */
+.certs{ margin-top: 10px; }
+.cert-row{
+  display: grid;
+  grid-template-columns: 78px 1fr;
+  gap: 14px;
+  padding: 12px 0;
+  border-top: 1px dashed var(--line);
+}
+.cert-row:first-child{ border-top: 0; padding-top: 6px; }
+
+.cert-when{
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.2;
+  padding-top: 2px;
+}
+.cert-name{
+  font-weight: 800;
+  font-size: 14px;
+  line-height: 1.25;
+}
+.cert-org{
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+.cert-minor .cert-name{ font-weight: 700; }
 
 
 
