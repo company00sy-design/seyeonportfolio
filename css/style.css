@@ -10,6 +10,12 @@
   --max:1120px;
 }
 
+:root{
+  --font: "Pretendard", system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
+}
+body{ font-family: var(--font); }
+
+
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
 body{
@@ -552,6 +558,7 @@ ul{margin:0;padding-left:18px}
   line-height: 1.45;
 }
 .cert-minor .cert-name{ font-weight: 700; }
+
 
 
 
