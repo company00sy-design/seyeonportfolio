@@ -19,13 +19,8 @@ function inferWorkCategory(item){
   const desc = (item?.desc || "").toLowerCase();
   const hay = `${title} ${desc} ${tags}`;
 
-  // 컨텐츠 계열 키워드
   if (/(reels|shorts|youtube|유튜브|릴스|sns|인스타|instagram|블로그|blog|피드)/.test(hay)) return "content";
-
-  // projects로 분리된 상세 페이지는 웹/프로젝트 성격으로 간주(필요하면 바꿔도 됨)
   if (href.includes("./projects/") || href.includes("/projects/")) return "web";
-
-  // 기본은 디자인
   return "design";
 }
 
@@ -61,7 +56,6 @@ function mountReveal(){
       }
     });
   }, { threshold: 0.12 });
-
   els.forEach(el => io.observe(el));
 }
 
@@ -136,19 +130,15 @@ function wireUI(){
     window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
   });
 
-  // Work tabs (Design/Web/Content)
+  // Work tabs
   document.querySelectorAll(".seg-btn").forEach(btn=>{
-    btn.addEventListener("click", ()=>{
-      setWorkTab(btn.dataset.tab);
-    });
+    btn.addEventListener("click", ()=> setWorkTab(btn.dataset.tab));
   });
 
   // href="#" 카드 클릭 방지
   document.addEventListener("click", (e)=>{
     const a = e.target.closest('a.card[data-disabled="true"]');
-    if(a){
-      e.preventDefault();
-    }
+    if(a) e.preventDefault();
   });
 }
 
@@ -172,7 +162,6 @@ function mountYear(){
 function mountSkillBars(){
   document.querySelectorAll(".skillbar").forEach(el=>{
     const lv = Math.max(0, Math.min(100, Number(el.dataset.level || 0)));
-    el.style.setProperty("--level", String(lv));
     const out = el.querySelector(".skill-out");
     if(out) out.textContent = `${lv}%`;
   });
@@ -184,10 +173,8 @@ function animateCountUp(el, to, duration = 900){
     el.textContent = `${to}%`;
     return;
   }
-
   const from = 0;
   const start = performance.now();
-
   function tick(now){
     const t = Math.min(1, (now - start) / duration);
     const eased = 1 - Math.pow(1 - t, 3);
@@ -195,7 +182,6 @@ function animateCountUp(el, to, duration = 900){
     el.textContent = `${value}%`;
     if(t < 1) requestAnimationFrame(tick);
   }
-
   el.textContent = "0%";
   requestAnimationFrame(tick);
 }
@@ -217,7 +203,6 @@ function animateSkillBar(el){
     return;
   }
 
-  // 오버슈트(너무 과하면 촌스러워서 6~12 안쪽)
   const overshoot = lv >= 85 ? 6 : lv >= 70 ? 9 : 12;
   const over = Math.min(100, lv + overshoot);
 
@@ -245,13 +230,20 @@ async function init(){
   wireUI();
   mountSkillBars();
 
-  const [works, posts, sns] = await Promise.all([
+  // ✅ Writing 제거: works + sns만 로드
+  const results = await Promise.allSettled([
     loadJSON("./data/works.json"),
-    loadJSON("./data/posts.json"),
     loadJSON("./data/sns.json"),
   ]);
 
-  // Work 분류(Design/Web/Content)
+  const worksRes = results[0];
+  if(worksRes.status !== "fulfilled") throw worksRes.reason;
+
+  const snsRes = results[1];
+  const works = worksRes.value;
+  const sns = (snsRes.status === "fulfilled") ? snsRes.value : [];
+
+  // Work 분류
   const design = [];
   const web = [];
   const content = [];
@@ -268,23 +260,19 @@ async function init(){
   if(webGrid) webGrid.innerHTML = web.map(cardHTML).join("");
   if(contentGrid) contentGrid.innerHTML = content.map(cardHTML).join("");
 
-  // 기본 탭: Design
   setWorkTab("design");
 
-  // Writing / SNS
-  const postGrid = document.getElementById("postGrid");
+  // SNS
   const snsGrid = document.getElementById("snsGrid");
-  if(postGrid) postGrid.innerHTML = posts.map(cardHTML).join("");
   if(snsGrid) snsGrid.innerHTML = sns.map(cardHTML).join("");
 
-  // Search
+  // Search (Work + SNS만)
   const si = document.getElementById("searchInput");
   const searchGrid = document.getElementById("searchGrid");
   const searchMeta = document.getElementById("searchMeta");
 
   const allCards = [
     ...works.map(w => ({...w, __group:"Work"})),
-    ...posts.map(p => ({...p, __group:"Writing"})),
     ...sns.map(s => ({...s, __group:"SNS"})),
   ];
 
@@ -302,7 +290,6 @@ async function init(){
 
   si?.addEventListener("input", ()=> renderSearch(si.value));
 
-  // Reveal
   mountReveal();
 }
 
