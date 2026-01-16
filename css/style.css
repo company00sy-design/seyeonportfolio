@@ -155,7 +155,6 @@ ul{margin:0;padding-left:18px}
   padding:14px;
   transition: transform .2s ease, box-shadow .2s ease;
 }
-.card:hover{transform: translateY(-2px);box-shadow:var(--shadow)}
 .thumb{
   width:100%;
   aspect-ratio:16/10;
@@ -428,6 +427,7 @@ ul{margin:0;padding-left:18px}
   .grid{grid-template-columns:1fr}
   .hero{padding-top:38px}
 }
+
 
 
 
